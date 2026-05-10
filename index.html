@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mother's Day Card</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  min-height: 100vh;
+
+  background: linear-gradient(-45deg,
+    #ff9a9e,
+    #fad0c4,
+    #fbc2eb,
+    #a6c1ee);
+
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 15px;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating hearts */
+.floating {
+  position: absolute;
+  top: -50px;
+  animation: fall linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Main Card */
+.stage {
+  width: 100%;
+  max-width: 750px;
+
+  min-height: 700px;
+
+  max-height: 95vh;
+
+  background: rgba(255,255,255,0.93);
+
+  border-radius: 30px;
+
+  overflow: hidden;
+
+  position: relative;
+
+  text-align: center;
+
+  padding: 35px;
+
+  z-index: 1;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Scenes with slide animation */
+.scene {
+  display: none;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.7s ease;
+}
+
+.scene.active {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Video */
+video {
+  width: 100%;
+  height: auto;
+
+  max-height: 420px;
+
+  border-radius: 15px;
+
+  margin: 15px 0;
+}
+
+/* Headings */
+h2 {
+  color: #d63384;
+  line-height: 1.5;
+  font-size: 32px;
+}
+
+/* Paragraphs */
+p {
+  font-size: 34px;
+  color: #d63384;
+  line-height: 1.6;
+}
+
+/* Buttons */
+button {
+  padding: 14px 24px;
+
+  border: none;
+
+  background: hotpink;
+
+  color: white;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  font-size: 18px;
+
+  margin-top: 15px;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: deeppink;
+}
+
+/* Music Button */
+.music-btn {
+  position: fixed;
+
+  top: 10px;
+  right: 10px;
+
+  z-index: 999;
+
+  background: rgba(255,255,255,0.8);
+
+  color: hotpink;
+
+  font-size: 14px;
+  padding: 10px 14px;
+}
+
+/* Mobile Optimization */
+@media (max-width: 600px) {
+
+  .stage {
+    padding: 20px;
+    border-radius: 22px;
+    min-height: 600px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 15px;
+  }
+
+  video {
+    max-height: 300px;
+  }
+
+  .music-btn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<!-- Music Button -->
+<button class="music-btn" onclick="toggleMusic()">
+  🎵 Music
+</button>
+
+<!-- Floating Hearts -->
+<div id="floating-container"></div>
+
+
+<div class="stage">
+
+ 
+  <div class="scene active">
+
+    <h2> A Special Moment</h2>
+
+    <p>
+      Click below to begin your surprise ❤️
+    </p>
+
+    <button onclick="startCard()">
+      Start
+    </button>
+
+  </div>
+
+  
+  <div class="scene">
+
+    <h2>💖 Happy Mother's Day 💖</h2>
+
+    <video id="momVideo" controls autoplay muted playsinline>
+      <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <p>
+     💖JEWEL💖 
+
+    </p>
+  </div>
+<div class="scene">
+
+    <h2>
+Happy Mother’s Day Jewel! Thank you for always being so kind,Loving, and supportive. I’m so grateful to have you in my life. Wishing you a beautiful day filled with love and happiness! 💐
+ 💐
+
+      <br><br>
+      Love,<br>
+      Nthabiseng ❤️
+    </h2>
+
+    <p>
+      05/10/2026 💕
+    </p>
+
+    <button onclick="restart()">
+      Replay
+    </button>
+
+  </div>
+
+</div>
+
+<script>
+let current = 0;
+
+const scenes =
+  document.querySelectorAll(".scene");
+
+const music =
+  document.getElementById("bgMusic");
+
+const video =
+  document.getElementById("momVideo");
+
+/* Show Scene */
+function showScene(index) {
+
+  scenes.forEach((scene, i) => {
+
+    if (i === index) {
+
+      scene.style.display = "block";
+
+      setTimeout(() => {
+        scene.classList.add("active");
+      }, 10);
+
+    } else {
+
+      scene.classList.remove("active");
+
+      setTimeout(() => {
+        scene.style.display = "none";
+      }, 700);
+    }
+  });
+}
+
+
+function startCard() {
+
+  music.play();
+
+  next();
+}
+
+
+function next() {
+
+  current++;
+
+  if (current >= scenes.length) {
+    current = scenes.length - 1;
+  }
+
+  showScene(current);
+}
+
+
+function restart() {
+
+  current = 0;
+
+  showScene(current);
+
+  music.currentTime = 0;
+
+  music.play();
+}
+
+/* Toggle Music */
+function toggleMusic() {
+
+  if (music.paused) {
+    music.play();
+  } else {
+    music.pause();
+  }
+}
+
+
+video.addEventListener("ended", () => {
+
+  next();
+
+});
+
+/* Floating Symbols */
+const container =
+  document.getElementById("floating-container");
+
+const symbols = [
+
+  "💖",
+  "🌹",
+  "💗",
+  "🌷",
+  "💘",
+  "💕"
+];
+
+function createFloating() {
+
+  const el =
+    document.createElement("div");
+
+  el.className = "floating";
+
+  el.innerHTML =
+    symbols[Math.floor(Math.random() * symbols.length)];
+
+  el.style.left =
+    Math.random() * 100 + "vw";
+
+  el.style.animationDuration =
+    (3 + Math.random() * 3) + "s";
+
+  el.style.fontSize =
+    (18 + Math.random() * 18) + "px";
+
+  container.appendChild(el);
+
+  setTimeout(() => {
+    el.remove();
+  }, 7000);
+}
+
+setInterval(createFloating, 250);
+
+/* Initial scene */
+showScene(current);
+</script>
+
+</body>
+</html>
+ 
