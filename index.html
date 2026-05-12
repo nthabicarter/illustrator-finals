@@ -10,7 +10,7 @@
 
 <style>
 
-/* RESET */
+
 *{
     margin:0;
     padding:0;
@@ -28,7 +28,7 @@ body{
     padding:20px;
 }
 
-/* FLOATING IMAGES */
+
 .hearts{
     position:fixed;
     inset:0;
@@ -72,7 +72,7 @@ body{
     to{transform:rotate(360deg);}
 }
 
-/* LAYOUT */
+
 .container{
     width:100%;
     max-width:1200px;
@@ -83,7 +83,7 @@ body{
     z-index:2;
 }
 
-/* CONTROLS */
+
 .controls{
     background:rgba(255,255,255,0.9);
     backdrop-filter:blur(10px);
@@ -143,7 +143,7 @@ textarea{
     background:#F26F17;
 }
 
-/* CARD */
+
 .preview{
     display:flex;
     justify-content:center;
@@ -161,7 +161,7 @@ textarea{
     box-shadow:0 15px 40px rgba(0,0,0,0.18);
 }
 
-/* THEMES */
+
 .pink{
     background:linear-gradient(#F24A43,#6F04D9,#05DBF2);
     color:#b03b6b;
@@ -177,7 +177,7 @@ textarea{
     color:#2a6f97;
 }
 
-/* TEXT */
+
 .card h1{
     font-family:'Dancing Script',cursive;
     font-size:2.5rem;
@@ -199,7 +199,7 @@ textarea{
     color: white;
 }
 
-/* VIDEO */
+
 video{
     width:100%;
     border-radius:18px;
@@ -207,7 +207,7 @@ video{
     color coral;
 }
 
-/* IMAGE DECORATIONS */
+
 .decor-img{
     position:absolute;
     width:90px;
@@ -224,7 +224,7 @@ video{
     left:10px;
 }
 
-/* MOBILE */
+
 @media (max-width:900px){
 
 .container{
@@ -265,7 +265,15 @@ body{
 }
 
 }
-
+.watermark{
+    position:absolute;
+    bottom:15px;
+    right:20px;
+    font-size:12px;
+    opacity:0.4;
+    font-weight:600;
+    letter-spacing:1px;
+}
 </style>
 </head>
 
@@ -329,12 +337,12 @@ Download Card
 
 </div>
 
-<!-- CARD -->
+
 <div class="preview">
 
 <div class="card pink" id="card">
 
-<!-- IMAGE DECOR -->
+
 <img src="balloon.png" class="decor-img decor1">
 <img src="cake.png" class="decor-img decor2">
 
@@ -355,6 +363,9 @@ Wishing you a beautiful day filled with happiness and love!
 <div class="signature" id="cardSignature">
 Love, Your Friend
 </div>
+    <div class="watermark">
+        Created by Nthabiseng Carter
+    </div>
 
 </div>
 
